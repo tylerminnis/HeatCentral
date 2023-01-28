@@ -1,0 +1,13 @@
+.logo {
+    max-width: 10%;
+}
+
+.signup-logo {
+    max-width: 10%;
+    justify-content: center;
+}
+
+.event-logo {
+    max-width: 33%;
+    justify-content: left;
+}
