@@ -1,0 +1,22 @@
+<%- include('../partials/header.ejs') %>
+
+    <div class = "container">
+        <div class = "row justify-content-center">
+            <div class="col-6">
+                <form method = "POST" action = "/event/<%= event.id%>?_method=PUT" class="new-form">
+                    <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" value="<%=event.title%>" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea rows="5" id="content" name="content" class="form-control"><%= event.details%></textarea>
+                </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
