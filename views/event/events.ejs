@@ -3,8 +3,8 @@
 <h3 class="text-center mb-3">Upcoming Events</h3>
   <div class="row justify-content-center">
 
-    <%if(event.length) {%>
-      <%event.forEach(event=>{ %>
+    <%if(events.length) {%>
+      <%events.forEach(event=>{ %>
       <div class="card m-4" style="width: 18rem;">
         <img src="../images/cltvmiami.png" class="card-img-top">
       <div class="card-body">
@@ -15,7 +15,7 @@
     </div>
     <%}) %>
     <%} else {%>
-      <p>There are no events to display.</p>
+      <p>There are no events to display. Events: <%=event%></p>
       <%}%>
   </div>
 </div>

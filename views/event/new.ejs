@@ -3,45 +3,49 @@
     <div class = "container">
         <div class = "row justify-content-center">
             <div class="col-6">
-                <form action="/event" method="POST" class="new-form"> 
+                <form method = "POST" action = "/event/" class="new-form">
                     <div class="mb-3">
                         <label class="form-label">Category</label>
-                        <select class="form-select" aria-label="Category select">
-                            <option value="ball">Pick-up basketball</option>
-                            <option value="watch party">Watch Party</option>
-                            <option value="hangout">Hang out</option>
-                            <option value="NBA2k ">NBA 2K</option>
-                            <option value="other">Other</option>
+                        <select class="form-select" aria-label="Category select" id="category" name="category" required>
+                            <option value="Pick-up basketball">Pick-up basketball</option>
+                            <option value="Watch Party">Watch Party</option>
+                            <option value="Hang out">Hang out</option>
+                            <option value="NBA 2k ">NBA 2K</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Title</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="title" id="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Host</label>
+                        <input type="text" class="form-control" name="host" id="host" required>
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Details</label>
-                        <textarea class="form-control"> </textarea>
+                        <textarea class= "form-control" required minlength="10" id="details" name="details"> </textarea>
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Where</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" required id="location" name="location">
                     </div>
                     <div class="mb-3">
                         <label  class="form-label">Start</label>
                         <label  class="form-label">End</label>
                         <div class="input-group">
-                        <input type="date" class="form-control">
-                        <input type="date" class="form-control">
+                        <input type="datetime-local" class="form-control" id="start" name="start">
+                        <input type="datetime-local" class="form-control" id="end" name="end">
                     </div>
                 </div>
                     <div class="mb-3">
-                        <label  class="form-label">Image</label>
+                        <label  class="form-label">Image (Max size is 2MB)</label>
                         <input type="file" class="form-control">
                     </div>
                     <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                  </form>
+                </form>
             </div>
         </div>
     </div>

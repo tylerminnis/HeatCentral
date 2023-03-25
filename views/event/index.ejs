@@ -1,14 +1,24 @@
 <%- include('../partials/header.ejs') %>
+<div class="container">
+<h3 class="text-center mb-3">Upcoming Events</h3>
+  <div class="row justify-content-center">
 
-    <div class = "container">
-        <div class = "row justify-content-center">
-            <div class="col-6">
-                <form>
-                    <div class="text-center">
-                        
-                    </div>
-                </form>
-            </div>
-        </div>
+    <%if(events.length) { events.sort()%>
+      <%events.forEach(event=>{ %>
+      <div class="card m-4" style="width: 18rem;">
+        <img src="../images/cltvmiami.png" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title"><%=event.title %></h5>
+        <p class="card-text text-truncate"><%=event.details %></p>
+        <a href="/event/<%=event.id%>" class="btn btn-primary">Learn more</a>
+      </div>
     </div>
+    <%}) %>
+    <%} else {%>
+      <p>There are no events to display. Events: <%=event%></p>
+      <%}%>
+  </div>
+</div>
+
+<div class="mb-4"></div>
     <%- include('../partials/footer.ejs') %>
