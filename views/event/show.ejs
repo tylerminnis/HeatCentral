@@ -9,7 +9,7 @@
       <div class="col">
         <ul class="list-unstyled">
         <li>
-          <strong>Host: </strong><%=event.host %>
+          <strong>Host: <%=event.host.firstName%> </strong>
         </li>
         <li>
           <strong>Category: </strong><%=event.category %>
@@ -28,6 +28,7 @@
         </li>
         
       </ul>
+      <%if(user == event.host) {%>
       <form>
       <button type="submit" class="btn btn-outline-primary  m-2" formmethod="GET" formaction = "<%= event.id%>/edit">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -42,6 +43,7 @@
         </svg>
       </button>
       </form>
+      <% } %>
     </div>
 </div>
     <%- include('../partials/footer.ejs') %>
