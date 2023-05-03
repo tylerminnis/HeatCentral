@@ -1,5 +1,6 @@
 const model = require('../models/user');
 const Event = require('../models/event');
+const modelRsvp = require('../models/rsvp');
 
 exports.signup = (req, res)=> {
     return res.render('./user/signup')
@@ -16,7 +17,7 @@ exports.create = (req, res, next)=> {
         }
         if(err.code === 11000) {
             req.flash('error', 'Email has been used');
-            return res.redirect('/users/new');
+            return res.redirect('/users/signup');
         }
         next(err);
     });
@@ -38,6 +39,7 @@ exports.login = (req, res, next)=>{
             user.comparePassword(password)
             .then(result=>{
                 if(result) {
+                    req.session.firstName = user.firstName;
                     req.session.user = user._id;
                     req.flash('success', 'You have successfully logged in');
                     res.redirect('/users/profile');
@@ -53,14 +55,20 @@ exports.login = (req, res, next)=>{
 
 exports.profile = (req, res, next)=>{
     let id = req.session.user;
-    Promise.all([model.findById(id), Event.find({author: id})])
+    Promise.all([model.findById(id), Event.find({host: id}), modelRsvp.find({user: id})])
     .then(results=>{
-        const [user, events] = results;
-        res.render('./user/profile', {user, events,results})
+
+        const [user, events, rsvps] = results;
+        let rsvpEvents = [];
+        for (yes in rsvps) {
+            if(rsvps[yes].status === 'YES' || rsvps[yes].status === 'MAYBE') {
+                rsvpEvents.push(rsvps[yes].event)
+            }
+        }
+        res.render('./user/profile', {user, events, rsvpEvents})
     })
     .catch(err=>next(err));
 };
-
 
 exports.logout = (req, res, next)=>{
     req.session.destroy(err=>{

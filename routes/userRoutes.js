@@ -4,26 +4,6 @@ const {isGuest, isLoggedIn} = require ('../middleware/auth');
 
 const router = express.Router();
 
-// //GET /users/new: send html form for creating a new user account
-// router.get('/signup', controller.signup);
-
-// //POST /users: create a new user account
-// router.post('/', controller.create);
-
-// //GET /users/login: send html for logging in
-// router.get('/login', controller.getUserLogin);
-
-// //POST /users/login: authenticate user's login
-// router.post('/login', controller.login);
-
-// //GET /users/profile: send user's profile page
-// router.get('/profile', controller.profile);
-
-// //POST /users/logout: logout a user
-// router.get('/logout', controller.logout);
-
-// with isGuest and isLoggedIn bc logic isn't done for that
-
 //GET /users/new: send html form for creating a new user account
 router.get('/signup', isGuest, controller.signup);
 

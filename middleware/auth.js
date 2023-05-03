@@ -31,7 +31,7 @@ exports.isAuthor = (req, res, next) =>{
             if(event.host == req.session.user) {
                 return next();
             } else {
-                let err = new Error ('Unauthorized to access to resource');
+                let err = new Error ('Unauthorized to access the resource');
                 err.status = 401;
                 return next(err);
             }
@@ -43,3 +43,25 @@ exports.isAuthor = (req, res, next) =>{
     })
     .catch(err=>next(err));
 };
+
+// this is to make sure hosts cannot rsvp for their own event
+exports.isNotAuthor = (req, res, next) => {
+    let id = req.params.id;
+
+    Event.findById(id)
+    .then(event => {
+        if(event) {
+        if(event.host != req.session.user) {
+            return next();
+        } else {
+            let err = new Error ('Unauthorized to access the resource');
+            err.status = 401;
+            return next(err);
+        }
+        } else {
+            let err = new Error('Cannot find a event with id ' + id);
+            err.status = 404;
+            next(err);
+        }
+    })
+}

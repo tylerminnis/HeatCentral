@@ -1,6 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/eventController');
-const {isLoggedIn, isAuthor} = require('../middleware/auth');
+const {isLoggedIn, isAuthor, isNotAuthor} = require('../middleware/auth');
 const { validateId } = require('../middleware/validator');
 
 const router = express.Router();
@@ -10,6 +10,11 @@ router.get('/', controller.index); // eventually need to come back in here and c
 router.get('/new', isLoggedIn, controller.new);
 
 router.post('/', isLoggedIn, controller.create);
+
+// RSVP route (s?)
+router.post('/:id/rsvp', validateId, isLoggedIn, isNotAuthor, controller.rsvp);
+
+router.get('/:id/rsvp', controller.getRsvp);
 
 router.get('/:id', validateId, controller.show);
 
