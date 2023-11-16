@@ -1,11 +1,13 @@
 <%- include('../partials/header.ejs') %>
 <div class="container">
-<h3 class="text-center mb-3">Upcoming Events</h3>
+<h1 class="text-center mb-3">Upcoming Events</h1>
   <div class="row justify-content-center">
 
-    <%if(events.length) { events.sort()%>
-      <%events.forEach(event=>{ %>
-      <div class="card m-4" style="width: 18rem;">
+    <% for(const category in events) { %>
+      <h3 class="m-3"><%= category %></h3>
+    <% if(events[category].length) {%>
+      <% events[category].forEach(event=>{ %>
+        <div class="card m-4" style="width: 18rem;">
         <img src="../images/cltvmiami.png" class="card-img-top">
       <div class="card-body">
         <h5 class="card-title"><%=event.title %></h5>
@@ -14,9 +16,11 @@
       </div>
     </div>
     <%}) %>
-    <%} else {%>
-      <p>There are no events to display. Events: <%=event%></p>
+    <% } else {%>
+      <p>There are no events to display.</p>
       <%}%>
+    <% } %>
+
   </div>
 </div>
 

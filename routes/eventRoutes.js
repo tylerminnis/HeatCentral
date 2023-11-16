@@ -1,21 +1,27 @@
 const express = require('express');
 const controller = require('../controllers/eventController');
+const {isLoggedIn, isAuthor, isNotAuthor} = require('../middleware/auth');
+const { validateId } = require('../middleware/validator');
+
 const router = express.Router();
 
-router.get('/event', controller.index);
+router.get('/', controller.index); // eventually need to come back in here and change it to /
 
-router.get('/events', controller.events)
+router.get('/new', isLoggedIn, controller.new);
 
-router.get('/new', controller.new);
+router.post('/', isLoggedIn, controller.create);
 
-router.post('/', controller.create);
+// RSVP route (s?)
+router.post('/:id/rsvp', validateId, isLoggedIn, isNotAuthor, controller.rsvp);
 
-router.get('/:id', controller.show);
+router.get('/:id/rsvp', controller.getRsvp);
 
-router.get('/:id/edit', controller.edit);
+router.get('/:id', validateId, controller.show);
 
-router.put('/:id', controller.update);
+router.get('/:id/edit', validateId, isLoggedIn, isAuthor, controller.edit);
 
-router.delete('/:id', controller.delete);
+router.put('/:id', validateId, isLoggedIn, isAuthor, controller.update);
+
+router.delete('/:id', validateId, isLoggedIn, isAuthor, controller.delete);
 
 module.exports = router;

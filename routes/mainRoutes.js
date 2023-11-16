@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get('/', controller.index);
 
-router.get('/login', controller.login);
+// router.get('/login', controller.login);
 
-router.get('/signup', controller.signup);
+// router.get('/signup', controller.signup);
 
 router.get('/contact', controller.contact);
 
